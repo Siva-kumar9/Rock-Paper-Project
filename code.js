@@ -4,6 +4,9 @@ let compscore=0;
 const choices=document.querySelectorAll(".choice");
 const msg=document.querySelector("#msg");
 
+const userScorepara=document.querySelector("#user");
+const compScorepara=document.querySelector("#comp");
+
 const gemCompChoice = () => {
     const options=["rock","paper","scissor"];
     const randIdx=Math.floor(Math.random() * 3);
@@ -16,15 +19,19 @@ const drawGame = () => {
     msg.style.backgroundColor="#081b31";
 }
 
-const showWinner = (userWin) => {
+const showWinner = (userWin, UserchoiceId, compChoice) => {
     if(userWin){
+        userscore++;
+        userScorepara.innerText = userscore;
         console.log("You Win");
-        msg.innerText="You Win!";
+        msg.innerText=`You Win!, Your ${UserchoiceId} Beats ${compChoice}`;
         msg.style.backgroundColor="green";
     }
     else{
+        compscore++;
+        compScorepara.innerText = compscore;
         console.log("You Loose");
-        msg.innerText="You Loose."
+        msg.innerText=`You Loose. , ${compChoice} Beats Your ${UserchoiceId}`;
         msg.style.backgroundColor="red";
     }
 }
@@ -50,7 +57,7 @@ const playgame = (UserchoiceId) => {
         else{
             userWin = compChoice=="rock" ? false : true;
         }
-        showWinner(userWin);
+        showWinner(userWin, UserchoiceId, compChoice);
     }
 }
 
